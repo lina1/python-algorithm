@@ -41,31 +41,31 @@ class Tree(object):
                     my_queue.append(tree_node.lchild)
                     my_queue.append(tree_node.rchild)
 
-    def front_digui(self, root):
+    def front_recurse(self, root):
 
         if not root:
             return
 
         print root.element,
 
-        self.front_digui(root.lchild)
-        self.front_digui(root.rchild)
+        self.front_recurse(root.lchild)
+        self.front_recurse(root.rchild)
 
-    def middle_digui(self, root):
+    def middle_recurse(self, root):
 
         if not root:
             return
 
-        self.middle_digui(root.lchild)
+        self.middle_recurse(root.lchild)
         print root.element,
-        self.middle_digui(root.rchild)
+        self.middle_recurse(root.rchild)
 
-    def later_digui(self, root):
+    def later_recurse(self, root):
         if not root:
             return
 
-        self.later_digui(root.lchild)
-        self.later_digui(root.rchild)
+        self.later_recurse(root.lchild)
+        self.later_recurse(root.rchild)
         print root.element,
 
     def front_stack(self, root):
@@ -161,22 +161,22 @@ if __name__ == '__main__':
 
     tree.level_queue(tree.root)
     print "\n"
-    tree.front_digui(tree.root)
+    tree.front_recurse(tree.root)
     print "\n"
 
     tree.front_stack(tree.root)
 
     print "\n"
-    tree.middle_digui(tree.root)
+    tree.middle_recurse(tree.root)
     print "\n"
 
     tree.middle_stack(tree.root)
 
     print "\n"
-    tree.later_digui(tree.root)
+    tree.later_recurse(tree.root)
     print "\n"
 
     tree.later_stack(tree.root)
 
-    a = tree.find_lca(tree.root, 5, 6)
-    print a.element
+    ancestor = tree.find_lca(tree.root, 5, 6)
+    print ancestor.element
