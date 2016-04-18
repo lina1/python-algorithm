@@ -49,29 +49,54 @@ def recurse(head, newhead):
 
     return newhead
 
+
+def remove_duplicate(head):
+    # input    1->2->3->3->4->4->5
+    # output   1->2->3->4->5
+    if not head:
+        return
+
+    if not head.next:
+        return head
+
+    node = head
+
+    while head.next:
+        if head.next.val == head.val:
+            head.next = head.next.next
+        else:
+            head = head.next
+
+    return node
+
 if __name__ == "__main__":
     l1 = ListNode(1)
     l2 = ListNode(2)
-    l3 = ListNode(3)
+    l3 = ListNode(2)
     l4 = ListNode(4)
     l1.next = l2
     l2.next = l3
     l3.next = l4
 
-    a = l1
+    # a = l1
+    # while a:
+    #     print a.val
+    #     a = a.next
+    #
+    # # new_a = recurse(l1, l4)
+    # # while new_a:
+    # #     print new_a.val
+    # #     new_a = new_a.next
+    #
+    # new = reverse(l1)
+    # while new:
+    #     print new.val
+    #     new = new.next
+
+    a = remove_duplicate(l1)
     while a:
         print a.val
         a = a.next
-
-    # new_a = recurse(l1, l4)
-    # while new_a:
-    #     print new_a.val
-    #     new_a = new_a.next
-
-    new = reverse(l1)
-    while new:
-        print new.val
-        new = new.next
 
 
 
