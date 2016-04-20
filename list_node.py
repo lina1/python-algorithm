@@ -51,7 +51,7 @@ def recurse(head, newhead):
 
 
 def remove_duplicate(head):
-    # input    1->2->3->3->4->4->5
+    # input    1->2->3->3->3->4->4->5
     # output   1->2->3->4->5
     if not head:
         return
@@ -69,14 +69,54 @@ def remove_duplicate(head):
 
     return node
 
+
+def remove_all_duplicate(head):
+    # input    1->2->3->3->4->4->5
+    # output   1->2->5
+    if not head:
+        return
+
+    if not head.next:
+        return head
+
+    # node = head
+    node = ListNode(0)
+    node.next = head
+
+    head = node
+
+    dup_val = -1
+
+    while head.next and head.next.next:
+
+        if head.next.val == head.next.next.val:
+            dup_val = head.next.val
+            if head.next.next.next:
+                head.next = head.next.next.next
+        elif head.next.val == dup_val:
+            head.next = head.next.next
+
+        else:
+            head = head.next
+
+    return node.next
+
 if __name__ == "__main__":
     l1 = ListNode(1)
+    l1_1 = ListNode(1)
     l2 = ListNode(2)
     l3 = ListNode(2)
-    l4 = ListNode(4)
-    l1.next = l2
+    l4 = ListNode(3)
+    l4_1 = ListNode(4)
+    l4_2 = ListNode(4)
+    l5 = ListNode(5)
+    l1.next = l1_1
+    l1_1.next = l2
     l2.next = l3
     l3.next = l4
+    l4.next = l4_1
+    l4_1.next = l4_2
+    l4_2.next = l5
 
     # a = l1
     # while a:
@@ -92,8 +132,13 @@ if __name__ == "__main__":
     # while new:
     #     print new.val
     #     new = new.next
+    #
+    # a = remove_duplicate(l1)
+    # while a:
+    #     print a.val
+    #     a = a.next
 
-    a = remove_duplicate(l1)
+    a = remove_all_duplicate(l1)
     while a:
         print a.val
         a = a.next
