@@ -70,6 +70,35 @@ def remove_duplicate(head):
     return node
 
 
+def remove_duplicate_no_sort(head):
+
+    # input 1->3->5->4->3->2->5
+    # output 1->3->5->4->2
+
+    if not head or not head.next:
+        return head
+
+    node = head
+    node_val = list()
+
+    node_val.append(head.val)
+
+    while head.next:
+        if head.next.val in node_val:
+            if head.next.next:
+                head.next = head.next.next
+            else:
+                head.next = None
+            continue
+
+        head = head.next
+
+        if head:
+            node_val.append(head.val)
+
+    return node
+
+
 def remove_all_duplicate(head):
     # input    1->2->3->3->4->4->5
     # output   1->2->5
@@ -103,12 +132,12 @@ def remove_all_duplicate(head):
 
 if __name__ == "__main__":
     l1 = ListNode(1)
-    l1_1 = ListNode(1)
-    l2 = ListNode(2)
-    l3 = ListNode(2)
+    l1_1 = ListNode(3)
+    l2 = ListNode(5)
+    l3 = ListNode(4)
     l4 = ListNode(3)
-    l4_1 = ListNode(4)
-    l4_2 = ListNode(4)
+    l4_1 = ListNode(2)
+    l4_2 = ListNode(3)
     l5 = ListNode(5)
     l1.next = l1_1
     l1_1.next = l2
@@ -138,7 +167,12 @@ if __name__ == "__main__":
     #     print a.val
     #     a = a.next
 
-    a = remove_all_duplicate(l1)
+    # a = remove_all_duplicate(l1)
+    # while a:
+    #     print a.val
+    #     a = a.next
+
+    a = remove_duplicate_no_sort(l1)
     while a:
         print a.val
         a = a.next
